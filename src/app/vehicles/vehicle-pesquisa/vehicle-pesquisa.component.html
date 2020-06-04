@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="ui-g">
+ <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g-12">
+      <h1>Vehicle Management</h1>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Plate Search</label>
+      <input pInputText type="text" name="plate"
+      [(ngModel)]="filtro.plate">
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" icon="pi pi-search" pTooltip="Search"
+      tooltipPosition="top" label=""></button>
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="vehicles" [paginator]="true" [rows]="filtro.itensPorPagina" [responsive]="true"
+      emptyMessage="No vehicles found " [lazy]="true" [totalRecords]="totalRegistros"
+      (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Plate</th>
+                <th>Model</th>
+                <th class="col-data-header">Manufacturer</th>
+                <th class="col-data-header">Status</th>
+                <th class="col-valor-header">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-vehicle>
+            <tr>
+                <td>{{vehicle.plate}}</td>
+                <td>{{vehicle.model}}</td>
+                <td class="col-data-content">{{vehicle.manufacturer}}</td>
+                <td class="col-valor-content" [style.color]="vehicle.status  ? 'green' : 'red'">{{vehicle.status}}</td>
+                <td class="col-acoes">
+                <button pButton icon="pi pi-pencil" pTooltip="Edit"
+                [routerLink]="['/vehicles', vehicle.id]" tooltipPosition="top"></button>
+                  <button pButton icon="pi pi-trash" pTooltip="Delete" tooltipPosition="top"
+                  (click)="confirmarExclusao(vehicle)"></button>
+              </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Add Vehicle" [routerLink]="['/vehicles/novo']"></a>
+    </div>
+</div>
+
+</div>

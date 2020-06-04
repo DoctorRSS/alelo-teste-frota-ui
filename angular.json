@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "alelo-teste-frota-ui": {
@@ -24,6 +24,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ng2-toasty/style-bootstrap.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "alelo-teste-frota-ui"
+    }
+  },
+  "defaultProject": "alelo-teste-frota-ui",
+  "cli": {
+    "analytics": "9e8fe870-aed5-45f1-973c-9c21823fd33a"
+  }
 }

@@ -1,3 +1,6 @@
+import { CoreModule } from './../../../algamoney-ui/src/app/core/core.module';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,6 +13,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    CoreModule,
     AppRoutingModule
   ],
   providers: [],

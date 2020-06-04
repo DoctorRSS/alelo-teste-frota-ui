@@ -1,0 +1,65 @@
+<div class="container">
+  <form  autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+     <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Update' : 'New' }} Vehicle</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Plate</label>
+        <input pInputText type="text" name="plate"
+        formControlName="plate" [disabled]="editando" >
+
+       <app-message [control]="formulario.get('plate')" error="obrigatoriedade"
+        text="Informe uma placa"></app-message>
+        <app-message [control]="formulario.get('plate')" error="tamanhoMinimo"
+        text="Mínimo de {{ formulario.get('plate').errors?.tamanhoMinimo?.tamanho }} caracteres">
+      </app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Model</label>
+        <input pInputText type="text" name="model"
+        formControlName="model" >
+
+       <app-message [control]="formulario.get('model')" error="obrigatoriedade"
+        text="Informe um Modelo"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Manufacturer</label>
+        <input pInputText type="text" name="manufacturer"
+        formControlName="manufacturer" >
+
+       <app-message [control]="formulario.get('manufacturer')" error="obrigatoriedade"
+        text="Informe um Fabricante"></app-message>
+
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Color</label>
+        <input pInputText type="text" name="color"
+        formControlName="color" >
+
+       <app-message [control]="formulario.get('color')" error="obrigatoriedade"
+        text="Informe uma Cor"></app-message>
+
+      </div>
+
+    <div class="ui-g-12 ui-md-9 ui-fluid" style="width:250px;margin-bottom:10px">
+        <p-radioButton name="status" formControlName="status" value=true label="Active" inputId="preopt1"></p-radioButton>
+        <p-radioButton name="status" formControlName="status" value=false label="Inactive" inputId="preopt2"></p-radioButton>
+    </div>
+
+       <div class="ui-g-12">
+         <button class="ui-button" pButton type="submit" label="Save" [disabled]="formulario.invalid"></button>
+         <button class="ui-button" pButton type="button" label="Reset All"
+         disabled class="ui-button-info"></button>
+         <a [routerLink]="['/vehicles']">Voltar para a pesquisa</a>
+       </div>
+
+     </div>
+   </form>
+ </div>

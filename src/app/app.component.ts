@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ToastyConfig } from 'ng2-toasty';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'alelo-teste-frota-ui';
+
+  constructor(private toastyConfig: ToastyConfig,
+    // tslint:disable-next-line: align
+    private router: Router
+    ) {
+    this.toastyConfig.theme = 'bootstrap';
+  }
+
 }
