@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class ErrorHandlerService {
 
   constructor(
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private router: Router) { }
 
   handle(errorResponse: any) {
@@ -32,7 +32,7 @@ export class ErrorHandlerService {
       msg = 'Erro ao processar serviço remoto. Tente novamente. ';
       console.log('Ocorreu um erro', errorResponse);
     }
-    this.toasty.error(msg);
+    this.messageService.add({ severity: 'error', detail: msg });
   }
 
 }

@@ -1,8 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 
 import 'rxjs/add/operator/toPromise';
-import { Vehicle } from '../core/model';
+import { Vehicle } from './../core/model';
 
 export class VehicleFiltro {
   plate: string;
@@ -19,7 +20,7 @@ export class VehicleService {
   vehiclesUrl: string;
 
   constructor(private http: HttpClient) {
-    this.vehiclesUrl = `http://localhost:8080/vehicles`;
+    this.vehiclesUrl = `http://localhost:8080/vehicle`;
   }
 
   pesquisar(filtro: VehicleFiltro): Promise<any> {
@@ -36,14 +37,14 @@ export class VehicleService {
       params = params.set('status', filtro.status.valueOf.toString());
     }
 
-    return this.http.get(`${this.vehiclesUrl}/filter`,
+    return this.http.get<any>(`${this.vehiclesUrl}/filter`,
       { params })
-      .toPromise()
+     .toPromise()
       .then(response => {
-        const vehicles = response['content']
+        const vehicles = response.content;
         const resultado = {
           vehicles,
-          total: response['totalElements']
+          total: response.totalElements
         };
         return resultado;
       });
@@ -76,12 +77,13 @@ export class VehicleService {
   }
 
   buscarPorId(id: number): Promise<Vehicle> {
-
-    return this.http.get(`${this.vehiclesUrl}/${id}`)
+  // return this.http.get(`${this.vehiclesUrl}/${id}`)
+    return this.http.get<Vehicle>(`${this.vehiclesUrl}/${id}`)
       .toPromise()
       .then(response => {
-        const vehicle = response as Vehicle;
-        return vehicle;
+      //  const vehicle = response as Vehicle;
+      const vehicle = response;
+      return vehicle;
       });
   }
 }

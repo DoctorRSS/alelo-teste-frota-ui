@@ -1,32 +1,31 @@
-import { ErrorHandlerService } from './../core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { VehicleService } from './../vehicles/vehicle.service';
-import { ToastyModule } from 'ng2-toasty';
 
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+
+import { ErrorHandlerService } from './../core/error-handler.service';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     RouterModule,
-
-    ConfirmDialogModule,
-    ToastyModule.forRoot(),
+    ToastModule,
+    ConfirmDialogModule
   ],
-  exports: [ ToastyModule,
+  exports: [ ToastModule,
     ConfirmDialogModule
   ],
   providers: [
     ErrorHandlerService,
     VehicleService,
     ConfirmationService,
-    Title
+    Title,
+    MessageService
   ]
 })
 export class CoreModule { }

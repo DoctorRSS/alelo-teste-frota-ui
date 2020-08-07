@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'vehicles', loadChildren: () => import('./vehicles/vehicle.module').then(m => m.VehicleModule)},
 
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
-  { path: '**', redirectTo: 'vehicles'},
+  { path: '**', redirectTo: 'vehicles'}
 ];
 
 @NgModule({

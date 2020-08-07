@@ -1,9 +1,8 @@
 import { Title } from '@angular/platform-browser';
-import { ToastyService } from 'ng2-toasty';
-import { ErrorHandlerService } from './../../../../../algamoney-ui/src/app/core/error-handler.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { VehicleFiltro, VehicleService } from './../vehicle.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 
 import { Table } from 'primeng/table/table';
 
@@ -22,7 +21,7 @@ export class VehiclePesquisaComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private errorHandler: ErrorHandlerService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private confirmation: ConfirmationService,
     private title: Title ){
 
@@ -59,8 +58,12 @@ export class VehiclePesquisaComponent implements OnInit {
 
     this.vehicleService.excluir(vehicle.id)
       .then(() => {
-        this.grid.reset();
-        this.toasty.success('Vehicle Deleted with Sucess!');
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.first = 0;
+        }
+        this.messageService.add({ severity: 'success', detail: 'Vehicle Deleted with Sucess!' });
       }).catch(erro => this.errorHandler.handle(erro));
   }
 

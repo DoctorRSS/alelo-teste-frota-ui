@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { ToastyService } from 'ng2-toasty';
+import { MessageService } from 'primeng/api';
 
 import { Vehicle } from './../../core/model';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -21,7 +21,7 @@ export class VehicleCadastroComponent implements OnInit {
 
   constructor(
     private vehicleService: VehicleService,
-    private toasty: ToastyService,
+    private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -66,7 +66,7 @@ export class VehicleCadastroComponent implements OnInit {
 
   validarTamanhoMinimo(valor: number) {
     return (input: FormControl) => {
-      return (!input.value || input.value.lenght >= valor ) ? null : { tamanhoMinimo:  {tamanho: valor} };
+      return (!(input.value) || input.value.length >= valor ) ? null : { tamanhoMinimo:  {tamanho: valor} };
     };
   }
 
@@ -85,7 +85,7 @@ export class VehicleCadastroComponent implements OnInit {
   adicionarVehicle() {
     this.vehicleService.adicionar(this.formulario.value)
     .then(vehicleAdicionado => {
-      this.toasty.success('Veículo adicionado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Vehicle Created with Sucess!' });
 
       this.router.navigate(['/vehicles', vehicleAdicionado.id]);
     })
@@ -95,10 +95,9 @@ export class VehicleCadastroComponent implements OnInit {
   atualizarVehicle() {
     this.vehicleService.atualizar(this.formulario.value)
     .then(vehicle => {
-      //this.lancamento = lancamento;
       this.formulario.patchValue(vehicle);
 
-      this.toasty.success('Veículo Atualizado com sucesso!');
+      this.messageService.add({ severity: 'success', detail: 'Vehicle Updated with Sucess!' });
       this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro));

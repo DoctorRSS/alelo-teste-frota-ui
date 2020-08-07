@@ -1,8 +1,7 @@
-import { VehicleCadastroComponent } from './vehicle-cadastro/vehicle-cadastro.component';
-import { VehiclePesquisaComponent } from './vehicle-pesquisa/vehicle-pesquisa.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { VehicleCadastroComponent } from './vehicle-cadastro/vehicle-cadastro.component';
+import { VehiclePesquisaComponent } from './vehicle-pesquisa/vehicle-pesquisa.component';
 
 const routes: Routes = [
   {
