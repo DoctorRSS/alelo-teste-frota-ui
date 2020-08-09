@@ -13,7 +13,7 @@ const routes: Routes = [
     component: VehicleCadastroComponent
   },
   {
-    path: ':codigo',
+    path: ':id',
     component: VehicleCadastroComponent
   },
 ];
